@@ -1,0 +1,107 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.1 Chrome/128.0.6613.186 Electron/32.2.6 Safari/537.36" version="25.0.1">
+  <diagram name="Page-1" id="48MUKcvFnSMb0L28M5t6">
+    <mxGraphModel dx="1911" dy="1796" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-1" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://yago-knowledge.org/assets/images/logo.png;" vertex="1" parent="1">
+          <mxGeometry x="370" y="-852" width="225" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-2" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://metabrainz.org/static/img/logos/picard.svg;" vertex="1" parent="1">
+          <mxGeometry x="70" y="-850" width="300" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="FJpwYs5F7EgTgGYYQ0GK-3" target="FJpwYs5F7EgTgGYYQ0GK-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-3" value="&lt;font style=&quot;&quot; color=&quot;#000000&quot;&gt;IDENTIFYING ENTITIES ON ONTOLOGIES&lt;/font&gt;" style="sketch=0;html=1;verticalAlign=top;labelPosition=center;verticalLabelPosition=bottom;align=center;spacingTop=-6;fontSize=11;fontStyle=1;fontColor=#999999;shape=image;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnY9Imh0dHBzOi8vdmVjdGEuaW8vbmFubyIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjAgMjAiPiYjeGE7CTxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+JiN4YTsJLnN0MHtmaWxsOiM0Mjg1ZjQ7fSYjeGE7CS5zdDF7ZmlsbDojNjY5ZGY2O30mI3hhOwkuc3Qye2ZpbGw6I2FlY2JmYTt9JiN4YTsJPC9zdHlsZT4mI3hhOwk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNNyA3aDZ2Nkg3eiIvPiYjeGE7CTxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik05IDBoMnY0SDl6TTUgMGgydjRINXptOCAwaDJ2NGgtMnoiLz4mI3hhOwk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNOSAxNmgydjRIOXptLTQgMGgydjRINXptOCAwaDJ2NGgtMnptMy01VjloNHYyem0wIDR2LTJoNHYyem0wLThWNWg0djJ6Ii8+JiN4YTsJPHBhdGggY2xhc3M9InN0MSIgZD0iTTAgMTFWOWg0djJ6bTAgNHYtMmg0djJ6bTAtOFY1aDR2MnoiLz4mI3hhOwk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNMyAzdjE0aDE0VjN6bTEyIDEySDVWNWgxMHoiLz4mI3hhOwk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMTAgMTBsLTMgM2g2eiIvPiYjeGE7CTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMyA3bC0zIDMgMyAzeiIvPiYjeGE7PC9zdmc+;" vertex="1" parent="1">
+          <mxGeometry x="300" y="-631.5" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="FJpwYs5F7EgTgGYYQ0GK-4" target="FJpwYs5F7EgTgGYYQ0GK-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-4" value="&lt;b&gt;USER PREFERENCES&lt;/b&gt;" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.users.csv_file;" vertex="1" parent="1">
+          <mxGeometry x="70" y="-593" width="59" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-7" value="&lt;font style=&quot;&quot; color=&quot;#000000&quot;&gt;QUERYING BASED ON ENTITIES FOUND&lt;/font&gt;" style="sketch=0;html=1;verticalAlign=top;labelPosition=center;verticalLabelPosition=bottom;align=center;spacingTop=-6;fontSize=11;fontStyle=1;fontColor=#999999;shape=image;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnY9Imh0dHBzOi8vdmVjdGEuaW8vbmFubyIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjAgMjAiPiYjeGE7CTxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+JiN4YTsJLnN0MHtmaWxsOiM0Mjg1ZjQ7fSYjeGE7CS5zdDF7ZmlsbDojNjY5ZGY2O30mI3hhOwkuc3Qye2ZpbGw6I2FlY2JmYTt9JiN4YTsJPC9zdHlsZT4mI3hhOwk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNNyA3aDZ2Nkg3eiIvPiYjeGE7CTxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik05IDBoMnY0SDl6TTUgMGgydjRINXptOCAwaDJ2NGgtMnoiLz4mI3hhOwk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNOSAxNmgydjRIOXptLTQgMGgydjRINXptOCAwaDJ2NGgtMnptMy01VjloNHYyem0wIDR2LTJoNHYyem0wLThWNWg0djJ6Ii8+JiN4YTsJPHBhdGggY2xhc3M9InN0MSIgZD0iTTAgMTFWOWg0djJ6bTAgNHYtMmg0djJ6bTAtOFY1aDR2MnoiLz4mI3hhOwk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNMyAzdjE0aDE0VjN6bTEyIDEySDVWNWgxMHoiLz4mI3hhOwk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMTAgMTBsLTMgM2g2eiIvPiYjeGE7CTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMyA3bC0zIDMgMyAzeiIvPiYjeGE7PC9zdmc+;" vertex="1" parent="1">
+          <mxGeometry x="570" y="-631.5" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-8" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png;" vertex="1" parent="1">
+          <mxGeometry x="321.11" y="-616.5" width="82.05" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="FJpwYs5F7EgTgGYYQ0GK-9" target="FJpwYs5F7EgTgGYYQ0GK-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-9" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png;" vertex="1" parent="1">
+          <mxGeometry x="595" y="-616.5" width="82.05" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-12" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="321.11" y="-720" width="77.77999999999997" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-6" value="" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.filter" vertex="1" parent="FJpwYs5F7EgTgGYYQ0GK-12">
+          <mxGeometry width="77.78" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-11" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://clhwogtywa.cloudimg.io/www.census.de/wp-content/uploads/sparql-logo-scaled.jpg;clipPath=inset(12.13% 30.33% 12.13% 30.67%);" vertex="1" parent="FJpwYs5F7EgTgGYYQ0GK-12">
+          <mxGeometry x="20.610000000000014" width="36.56" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-13" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="590" y="-720" width="77.77999999999997" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-14" value="" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.filter" vertex="1" parent="FJpwYs5F7EgTgGYYQ0GK-13">
+          <mxGeometry width="77.78" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-15" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://clhwogtywa.cloudimg.io/www.census.de/wp-content/uploads/sparql-logo-scaled.jpg;clipPath=inset(12.13% 30.33% 12.13% 30.67%);" vertex="1" parent="FJpwYs5F7EgTgGYYQ0GK-13">
+          <mxGeometry x="20.610000000000014" width="36.56" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="FJpwYs5F7EgTgGYYQ0GK-16" target="FJpwYs5F7EgTgGYYQ0GK-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="170" y="-370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-16" value="&lt;font style=&quot;&quot; color=&quot;#000000&quot;&gt;FORMAT SPARKQL OUTPUTS&lt;/font&gt;" style="sketch=0;html=1;verticalAlign=top;labelPosition=center;verticalLabelPosition=bottom;align=center;spacingTop=-6;fontSize=11;fontStyle=1;fontColor=#999999;shape=image;aspect=fixed;imageAspect=0;image=data:image/svg+xml,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnY9Imh0dHBzOi8vdmVjdGEuaW8vbmFubyIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB2aWV3Qm94PSIwIDAgMjAgMjAiPiYjeGE7CTxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+JiN4YTsJLnN0MHtmaWxsOiM0Mjg1ZjQ7fSYjeGE7CS5zdDF7ZmlsbDojNjY5ZGY2O30mI3hhOwkuc3Qye2ZpbGw6I2FlY2JmYTt9JiN4YTsJPC9zdHlsZT4mI3hhOwk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNNyA3aDZ2Nkg3eiIvPiYjeGE7CTxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik05IDBoMnY0SDl6TTUgMGgydjRINXptOCAwaDJ2NGgtMnoiLz4mI3hhOwk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNOSAxNmgydjRIOXptLTQgMGgydjRINXptOCAwaDJ2NGgtMnptMy01VjloNHYyem0wIDR2LTJoNHYyem0wLThWNWg0djJ6Ii8+JiN4YTsJPHBhdGggY2xhc3M9InN0MSIgZD0iTTAgMTFWOWg0djJ6bTAgNHYtMmg0djJ6bTAtOFY1aDR2MnoiLz4mI3hhOwk8cGF0aCBjbGFzcz0ic3QyIiBkPSJNMyAzdjE0aDE0VjN6bTEyIDEySDVWNWgxMHoiLz4mI3hhOwk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNMTAgMTBsLTMgM2g2eiIvPiYjeGE7CTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMyA3bC0zIDMgMyAzeiIvPiYjeGE7PC9zdmc+;" vertex="1" parent="1">
+          <mxGeometry x="570" y="-440" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-17" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1869px-Python-logo-notext.svg.png;" vertex="1" parent="1">
+          <mxGeometry x="595" y="-425" width="82.05" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="FJpwYs5F7EgTgGYYQ0GK-20" target="FJpwYs5F7EgTgGYYQ0GK-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-20" value="&lt;b&gt;SUGGESTED ITEMS&lt;/b&gt;" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.users.csv_file;" vertex="1" parent="1">
+          <mxGeometry x="70" y="-401.5" width="59" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-24" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg/826px-Microsoft_Office_Excel_%282019%E2%80%93present%29.svg.png;" vertex="1" parent="1">
+          <mxGeometry x="13.5" y="-320" width="48.34" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-25" value="OR" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="73.5" y="-312" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-26" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://ih1.redbubble.net/image.2488655049.9084/st,small,507x507-pad,600x600,f8f8f8.jpg;" vertex="1" parent="1">
+          <mxGeometry x="123.5" y="-328.5" width="62" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-27" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg/826px-Microsoft_Office_Excel_%282019%E2%80%93present%29.svg.png;" vertex="1" parent="1">
+          <mxGeometry x="13.5" y="-518" width="48.34" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-28" value="OR" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="73.5" y="-510" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-29" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://ih1.redbubble.net/image.2488655049.9084/st,small,507x507-pad,600x600,f8f8f8.jpg;" vertex="1" parent="1">
+          <mxGeometry x="123.5" y="-526.5" width="62" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-30" value="" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="-610" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="FJpwYs5F7EgTgGYYQ0GK-33" target="FJpwYs5F7EgTgGYYQ0GK-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="6" y="-571.5" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-33" value="&lt;b&gt;&lt;font style=&quot;font-size: 22px;&quot;&gt;START&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-100" y="-591.5" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="FJpwYs5F7EgTgGYYQ0GK-34" value="&lt;b&gt;&lt;font style=&quot;font-size: 22px;&quot;&gt;END&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-85" y="-400" width="70" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
