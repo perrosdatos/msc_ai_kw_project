@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+%configure options for the hyperref package,
+%which is used to add hyperlinks to documents
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=blue
+    }
+\urlstyle{same}
+
+%configure options for the page size
+\usepackage[
+%paperheight=16cm, paperwidth=12cm,% Set the height and width of the paper
+includehead,
+nomarginpar,% We don't want any margin paragraphs
+%textwidth=10cm,% Set \textwidth to 10cm
+%headheight=10mm,% Set \headheight to 10mm
+]{geometry}
+
+
+% Set the page style to "fancy"...
+\pagestyle{fancy}
+%... then configure it.
+\fancyhead{} % clear all header fields
+\fancyhead[L]{TSWR21 Project Report,  HT2024}
+
+\title{Project Title}
+\author{Team\_member 1, Team\_member 2, ...}
+%\date{}
+\begin{document}
+
+\maketitle  % This command generates the title
+
+\section{Introduction}
+
+{\it Introduce the application in this section. After reading this section, the reader should understand what the application is about.}
+
+\noindent Note:
+\begin{itemize}
+  \item In this template, all italic text should be removed and replaced with your own text (which should not be italic); the italic text is just a placeholder letting you know what to write there.
+
+  \item If you use Figures or Tables, please make sure to give each one a caption and a figure/table number and refer to them from the main text!
+
+  \item References should be provided where applicable.
+
+\end{itemize}
+
+\section{Application Description}
+
+\subsection{Application System}
+
+{\it Depict the fundamental structure of the application system in this section. After reading this section, the reader should understand the components of the application system and their relations and/or the interactions between them. }
+
+\subsection{Technical Details}
+
+{\it In this section you also should include the information of the data sources utilized in the application, the ontolog(ies) \cite{Guarino2009} used/developed if there are, particular method(s)/technique(s) if there are, and tool(s)/librar(ies) are used to develop the application.
+
+\subsection{Application Usage}
+
+{\it In this section you should present the functionalities of the application using several use cases. }
+
+\section{Discussion}
+
+Discuss the lessons you learned from the project and the possibilities and limitations of the theories and technologies learned from this course.
+
+\begin{thebibliography}{99}
+
+\bibitem{Guarino2009}
+Guarino, Nicola, Daniel Oberle, and Steffen Staab. "What is an ontology?." {\it Handbook on ontologies} (2009): 1-17.
+
+\end{thebibliography}
+
+
+
+\end{document}
