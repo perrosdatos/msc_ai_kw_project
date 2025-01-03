@@ -1,0 +1,5 @@
+# .gitignore
+
+# Ignore ".$*" and ".DS_Store"
+**/.$*
+**/.DS_Store
