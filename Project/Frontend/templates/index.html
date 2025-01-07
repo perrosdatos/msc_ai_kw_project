@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Swipe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            margin: 0;
+            padding: 0;
+            color: #ecf0f1; 
+        }
+        html, body {
+            height: 100%;
+        }
+        .container {
+            display: flex;
+            height: 100%;
+        }
+        .left, .right {
+            flex: 1;
+        }
+        .center {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+        }
+        .card-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background-color: #34495e;
+            position: absolute;
+            overflow: hidden; /* Ensure child elements respect the border-radius */
+            border-radius: 25px; /* Same as card for consistency */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .card {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            padding: 20px;
+            border: none;
+            border-radius: 25px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            background-color: #1c2833;
+            transition: transform 0.5s, opacity 0.5s;
+            will-change: transform, opacity;
+            animation: fadeIn 0.5s ease-in;
+            overflow: hidden; /* Ensure child content doesn't overflow the card */
+        }
+        .swipe-right {
+            transform: translateX(100vw) rotate(15deg); /* Swipe off to the right */
+            opacity: 0; /* Fade out */
+        }
+
+        .swipe-left {
+            transform: translateX(-100vw) rotate(-15deg); /* Swipe off to the left */
+            opacity: 0; /* Fade out */
+        }
+
+        .card-img {
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-top: 20px; /* Top padding for the image */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ecf0f1;
+        }
+        .song-info {
+            font-size: 1.2rem;
+            color: #bdc3c7;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .icon-button {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .icon-button img {
+            width: 55px;
+            height: 55px;
+            background-color: white;
+            transition: transform 0.2s;
+            border-radius: 50%; /* Circular icons */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); 
+            object-fit: cover;
+
+        }
+        .icon-button img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Preferences Button Styling */
+        #preferences-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 1000; /* Ensure it is above other elements */
+        }
+        #preferences-btn:hover {
+            background-color: #2980b9; 
+            transform: scale(1.05); 
+        }
+
+        #preferences-btn:active {
+            background-color: #1d6ca0; 
+            transform: scale(0.98); 
+        }
+
+        .no-artists-message {
+            color: white;
+        }
+        .no-song-message {
+            color: white;
+        }
+
+        .big-message {
+            font-family: 'Arial', sans-serif;
+            font-size: 36px;
+            font-weight: bold;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        .small-message {
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            margin: 0;
+        }
+
+    </style>    
+</head>
+<body>
+    <div class="container">
+        <div class="left"></div>
+        <div class="center" id="song-container"></div>
+        <div class="right"></div>
+    </div>
+
+    <!-- Preferences Button -->
+    <button id="preferences-btn">Set Preferences</button>
+
+    <script>
+        let currentSongIndex = 0;
+        let songs = [];
+        let startX = 0;
+        let endX = 1000;
+        let swipeInProgress = false;
+        let isSongChanging = false; // Flag to prevent swipe while song is changing
+        let selectedArtists = [];
+        let selectedArtistsContainer;
+
+        // Fetch songs from the server
+        async function fetchSongs() {
+            try {
+                const response = await axios.get('/songs');
+
+                if (response.data === "No favorite artists") {
+                    // Display a message when no favorite artists are found
+                    displayNoArtistsMessage();
+                } else {
+                    songs = response.data.flat();
+                    if (songs.length > 0) {
+                        displaySong(songs[currentSongIndex]);
+                    } else {
+                        displayNoSongsMessage();
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching songs:', error);
+            }
+        }
+
+        // Display the current song
+        function displaySong(song) {
+            const songContainer = document.getElementById('song-container');
+            songContainer.innerHTML = `
+            <div id="card-wrapper" class="card-wrapper">
+                <div class="card">
+                    <img src="${song.album.images[0].url}" class="card-img" alt="${song.name}">
+                    <div class="card-body">
+                        <h5 class="card-title">${song.name}</h5>
+                        <p class="card-text song-info">By ${song.artists[0].name}</p>
+                        <iframe src="https://open.spotify.com/embed/track/${song.id}" 
+                                width="100%" height="80" frameborder="0" 
+                                allowtransparency="true" allow="encrypted-media">
+                        </iframe>
+                        <div class="buttons">
+                            <button id="dislike-btn" class="icon-button">
+                                <img src="/static/icons/dislike.png" alt="Dislike">
+                            </button>
+                            <button id="back-btn" class="icon-button">
+                                <img src="/static/icons/back.png" alt="Back">
+                            </button>
+                            <button id="like-btn" class="icon-button">
+                                <img src="/static/icons/like.png" alt="Like">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+            document.getElementById('like-btn').addEventListener('click', () => handleSwipe('right', song));
+            document.getElementById('dislike-btn').addEventListener('click', () => handleSwipe('left', song));
+            document.getElementById('back-btn').addEventListener('click', () => previousSong());
+        }
+
+        // Move to the next song
+        function nextSong() {
+            if (isSongChanging) return; // Prevent going to next song if a song transition is in progress
+            isSongChanging = true;
+            currentSongIndex++;
+            if (currentSongIndex >= songs.length) {
+                currentSongIndex = 0; // Loop back to the first song
+            }
+            displaySong(songs[currentSongIndex]);
+            setTimeout(() => isSongChanging = false, 500); // Reset flag after transition animation
+        }
+
+        // Move to the previous song
+        function previousSong() {
+            if (isSongChanging) return; // Prevent going to previous song if a song transition is in progress
+            isSongChanging = true;
+            if (currentSongIndex > 0) {
+                currentSongIndex--; // Move to the previous song only if not at the first song
+            }
+            displaySong(songs[currentSongIndex]);
+            setTimeout(() => isSongChanging = false, 500); // Reset flag after transition animation
+        }
+
+        // Handle swipe (right or left)
+        function handleSwipe(direction, song) {
+            if (isSongChanging) return; // Prevent swipe action while song is changing
+
+            const card = document.querySelector('.card');
+            if (direction === 'right') {
+                card.classList.add('swipe-right');
+                feedbackSong('like', song)
+            } else if (direction === 'left') {
+                card.classList.add('swipe-left');
+                feedbackSong('dislike', song)
+            }
+
+            // Wait for the animation to finish, then load the next song
+            setTimeout(() => {
+                nextSong();
+            }, 500); // Match the CSS animation duration
+        }
+
+        async function feedbackSong(feedback, song){
+            try {
+                // Create the payload with both ID and name
+                const payload = {
+                    "feedback": feedback,
+                    "song": song.name 
+                };
+
+                // Make the POST request
+                const response = await fetch('/feedbackSong', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                // Check for successful submission
+                if (!response.ok) {
+                    const errorMessage = await response.text();
+                    throw new Error(`Failed to like song: ${errorMessage}`);
+                }
+
+                const result = await response.json();
+                console.log('Response from server:', result);
+
+            } catch (error) {
+                console.error('Error submitting liked song:', error);
+                alert('An error occurred while liking song. Please try again.');
+            }
+        }
+
+        // Swipe detection logic
+        const songContainer = document.getElementById('song-container');
+/*
+        // Handle touch events
+        songContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            swipeInProgress = true;
+        });
+
+        songContainer.addEventListener('touchmove', (e) => {
+            if (!swipeInProgress) return;
+            endX = e.touches[0].clientX;
+        });
+
+        songContainer.addEventListener('touchend', () => {
+            if (!swipeInProgress) return;
+
+            if (startX > endX + 50) {
+                handleSwipe('left');
+            } else if (endX > startX + 50) {
+                handleSwipe('right');
+            }
+
+            swipeInProgress = false;
+        });
+
+        // Handle mouse events (for desktop users)
+        songContainer.addEventListener('mousedown', (e) => {
+            startX = e.clientX;
+            swipeInProgress = true;
+        });
+
+        songContainer.addEventListener('mousemove', (e) => {
+            if (!swipeInProgress) return;
+            endX = e.clientX;
+        });
+
+        songContainer.addEventListener('mouseup', () => {
+            if (!swipeInProgress) return;
+
+            if (startX > endX + 50) {
+                handleSwipe('left');
+            } else if (endX > startX + 50) {
+                handleSwipe('right');
+            }
+
+            swipeInProgress = false;
+        });
+*/
+        
+        async function loadPreferencesModal() {
+            try {
+                const response = await fetch('/static/prefences-modal.html');
+                
+                // Check if the fetch was successful
+                if (!response.ok) {
+                    throw new Error('Failed to load modal.html');
+                }
+
+                const modalHTML = await response.text();
+                
+                // Insert the modal HTML into the body
+                document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+                // Wait for the modal element to be inserted into the DOM
+                const modal = document.getElementById('preferences-modal');
+
+                // Check if modal was inserted
+                if (modal) {
+                    const closeModal = document.getElementById('close-modal');
+                    const searchButton = document.getElementById('artists-search-button'); 
+                    const artistsSearchInput = document.getElementById('artists-search-input');
+                    const artistsDropdown = document.getElementById('artists-dropdown');
+                    selectedArtistsContainer = document.getElementById('selected-artists');
+                    const submitButton = document.getElementById('submit-preferences'); 
+
+                    // Display the modal
+                    modal.style.display = 'block';
+
+                    // Add event listener for the search button
+                    if (searchButton) {
+                        searchButton.addEventListener('click', () => {
+                            console.log('Search button clicked');
+                            searchArtists(artistsSearchInput, artistsDropdown);  // Pass the input and dropdown as arguments
+                        });
+                    } else {
+                        console.error('Search button not found in modal');
+                    }
+
+                    // Add event listener for the submit button
+                    if (submitButton) {
+                        submitButton.addEventListener('click', () => {
+                            console.log('Submit button clicked');
+                            submitSelectedArtists(artistsSearchInput, artistsDropdown);  // Pass the input and dropdown as arguments
+                        });
+                    } else {
+                        console.error('Search button not found in modal');
+                    }
+
+                    // Close modal logic
+                    closeModal.onclick = function() {
+                        modal.style.display = 'none';
+                    }
+
+                    window.onclick = function(event) {
+                        if (event.target == modal) {
+                            modal.style.display = 'none';
+                        }
+                    }
+                } else {
+                    console.error('Modal element not found in DOM');
+                }
+
+            } catch (error) {
+                console.error('Error loading preferences modal:', error);
+            }
+        }
+
+        async function submitSelectedArtists() {
+
+            if (selectedArtists.length === 0) {
+                alert('Please select at least one artist before submitting.');
+                return;
+            }
+
+            try {
+                // Create the payload with both ID and name
+                const payload = {
+                    artists: selectedArtists.map(artist => ({
+                        id: artist.id,
+                        name: artist.name,
+                    })),
+                };
+
+                // Make the POST request
+                const response = await fetch('/saveFavArtists', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                // Check for successful submission
+                if (!response.ok) {
+                    const errorMessage = await response.text();
+                    throw new Error(`Failed to save artists: ${errorMessage}`);
+                }
+
+                const result = await response.json();
+                console.log('Response from server:', result);
+                fetchSongs();
+                // Close the modal
+                const modal = document.getElementById('preferences-modal');
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+
+            } catch (error) {
+                console.error('Error submitting selected artists:', error);
+                alert('An error occurred while saving artists. Please try again.');
+            }
+        }
+
+        // Function to search artists
+        async function searchArtists(artistsSearchInput, artistsDropdown) {
+            const query = artistsSearchInput.value.trim();
+
+            if (query.length < 2) {
+                artistsDropdown.style.display = 'none';
+                return;
+            }
+
+            console.log(`Searching for artists: ${query}`);
+            try {
+                const response = await fetch(`/getartist?artist_name=${encodeURIComponent(query)}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch artists');
+                }
+
+                const artists = await response.json();
+                console.log(`Response: ${artists}`)
+                displayArtistResults(artists, artistsDropdown, artistsSearchInput);  // Pass dropdown and input to display function
+            } catch (error) {
+                console.error('Error fetching artists:', error);
+            }
+        }
+
+        // Display artist results in dropdown
+        function displayArtistResults(artists, artistsDropdown, artistsSearchInput) {
+            artistsDropdown.innerHTML = '';
+
+            if (artists.length === 0) {
+                artistsDropdown.innerHTML = '<div>No artists found</div>';
+            } else {
+                artists.forEach(artist => {
+                    const artistItem = document.createElement('div');
+                    artistItem.textContent = artist.name;
+                    artistItem.addEventListener('click', () => {
+                        if (!selectedArtists.some(a => a.name === artist.name)) {
+                            selectedArtists.push(artist);
+                            renderSelectedArtists();
+                        }
+                        artistsDropdown.style.display = 'none';
+                        artistsSearchInput.value = '';
+                    });
+                    artistsDropdown.appendChild(artistItem);
+                });
+            }
+            artistsDropdown.style.display = 'block';
+        }
+
+        // Render selected artists
+        function renderSelectedArtists() {
+            selectedArtistsContainer.innerHTML = '';
+            selectedArtists.forEach(artist => {
+                const artistChip = document.createElement('span');
+                artistChip.textContent = artist.name;
+
+                const removeBtn = document.createElement('span');
+                removeBtn.textContent = 'x';
+                removeBtn.className = 'remove';
+                removeBtn.addEventListener('click', () => {
+                    selectedArtists = selectedArtists.filter(a => a.name !== artist.name);
+                    renderSelectedArtists();
+                });
+
+                artistChip.appendChild(removeBtn);
+                selectedArtistsContainer.appendChild(artistChip);
+            });
+        }
+
+        document.getElementById('preferences-btn').addEventListener('click', () => {
+            console.log("Open Modal");
+            loadPreferencesModal();
+        });
+
+        // Function to display a message for no favorite artists
+        function displayNoArtistsMessage() {
+            const container = document.getElementById('song-container');
+            container.innerHTML = `
+                <div class="no-artists-message">
+                    <h1 class="big-message">404 Artists Not Found</h1>
+                    <p class="small-message">Select your favorites to get song recommendations.</p>
+                </div>
+            `;
+        }
+
+
+        // Function to display a message for no songs found
+        function displayNoSongsMessage() {
+            const container = document.getElementById('song-container');
+            container.innerHTML = `
+                <div class="no-song-message">
+                    <h1 class="big-message">404 Song Not Found</h1>
+                    <p class="small-message">No songs found for your favorite artists.</p>
+                    <p class="small-message">Try selecting different artists.</p>
+                </div>
+            `;
+        }
+
+        // Fetch songs on page load
+        fetchSongs();
+
+    </script>
+</body>
+</html>

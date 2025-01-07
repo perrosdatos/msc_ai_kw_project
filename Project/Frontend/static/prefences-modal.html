@@ -1,0 +1,153 @@
+<div id="preferences-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-modal" class="close">&times;</span>
+        <h2>Music Preferences</h2>
+        <div id="preferences-steps">
+            <div class="preferences-step" id="step-artists">
+                <h3>Select Your Favorite Artists</h3>
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <input type="text" id="artists-search-input" placeholder="Search for artists" style="flex-grow: 1;">
+                    <button id="artists-search-button" class="modal-button">Search</button>
+                </div>
+                <div id="artists-dropdown" class="dropdown" style="display: none;"></div>
+                <div id="selected-artists" class="selected-items"></div>
+                <button id="submit-preferences" class="modal-button">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+        background-color: #1c2833;
+        margin: 5% auto;      
+        padding: 40px;        
+        border: 1px solid #888;
+        width: 85%;          
+        max-width: 600px;     
+        height: auto;         
+        max-height: 90vh;     
+        text-align: center;
+        border-radius: 5px;
+        display: flex;        
+        flex-direction: column; 
+        justify-content: flex-start; 
+        overflow: hidden;     
+    }
+
+    .preferences-step {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dropdown {
+        background-color: #34495e;
+        border: 1px solid #ddd;
+        width: 60%;             
+        max-height: 150px;      
+        overflow-y: auto;       
+        margin-top: 10px;       
+    }
+
+    .selected-items {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .selected-items span {
+        background-color: #3498db;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 15px;
+        margin: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .preferences-step input {
+        width: 80%;
+        padding: 10px;
+        margin: 10px 0;
+    }
+    .preferences-step-button {
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .dropdown div {
+        padding: 10px;
+        cursor: pointer;
+    }
+    .dropdown div:hover {
+        background-color: #1c2833;
+    }
+
+    .selected-items span .remove {
+        margin-left: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .modal-button{
+        padding: 10px 20px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.1s; 
+    }
+
+    .modal-button:hover {
+        background-color: #2980b9; 
+        transform: scale(1.05); 
+    }
+
+    .modal-button:active {
+        background-color: #1d6ca0; 
+        transform: scale(0.98); 
+    }
+
+    #artists-search-button {
+        margin-left: 10px;
+    }
+
+    #submit-preferences {
+        margin-top: 20px;
+    }
+
+
+
+</style>
