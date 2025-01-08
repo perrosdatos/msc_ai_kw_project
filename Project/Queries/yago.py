@@ -6,7 +6,8 @@ def get_entity_for_musician(artist):
     # YAGO SPARQL endpoint
     endpoint_url = "https://yago-knowledge.org/sparql/query"
 
-    # Randomly select an artist from the list
+    # Randomly select an artist from the list+
+    print(artist)
     artist = artist.lower()
 
     # SPARQL query template
@@ -162,12 +163,68 @@ def get_recommendations_based_on_influencedBy(artist_str, max_influences = 2):
         dict_item = get_label_by_entity_url(influence)
         songs = get_songs_by_artist_url(influence)
         results.append({"artist":influence, "label":dict_item["label"], "songs":songs})
-        
     return results
 
-#kendrick = get_entity_for_musician("Kendrick")
-#print("kendrick")
-#kendrick_songs = get_songs_by_artist_url(kendrick[0]["entity"])
-#print("kendrick_songs")
-influencied_by_songs = get_recommendations_based_on_influencedBy("Xutos e Pontapes")
-print(influencied_by_songs)
+def get_randomly_weighted(items, k):
+    artists = list(items.keys())
+    weights = list(items.values())
+    selected = {}
+
+    for _ in range(k):
+        total_weight = sum(weights)
+        probabilities = [w / total_weight for w in weights]
+
+        chosen_index = random.choices(range(len(artists)), probabilities, k=1)[0]
+        selected[artists[chosen_index]] =  weights[chosen_index]
+
+        artists.pop(chosen_index)
+        weights.pop(chosen_index)
+
+    return selected
+    
+def get_recommendarions_based_on_influencedBy_likes_dislikes(likes = [], dislikes = [], max_influences=4, debug=False):
+    influencedByCounters  = {}
+    results = []
+    print("Here")
+    for artist in likes:
+        if debug:
+            print(f"Processing liked artist: {artist} ")    
+        getting_items = get_entity_for_musician(artist)
+        for item in getting_items:
+            if item["influenced_by"] is not None:
+                if item["influenced_by"] not in influencedByCounters:
+                    influencedByCounters[item["influenced_by"]] = 1
+                else:
+                    influencedByCounters[item["influenced_by"]] += 1
+    for artist in dislikes:
+        if debug:
+            print(f"Processing disliked artist: {artist} ")   
+        
+        getting_items = get_entity_for_musician(artist)
+        for item in getting_items:
+            if item["influenced_by"] is not None:
+                if item["influenced_by"] in influencedByCounters:
+                    influencedByCounters[item["influenced_by"]] -= 1
+                    
+                    if debug:
+                        print(f'{item["influenced_by"]} was penalized')
+                    if influencedByCounters[item["influenced_by"]] == 0:
+                        del influencedByCounters[item["influenced_by"]]
+    if len(influencedByCounters) == 0:
+        return None
+    
+    influenced_by_dict = get_randomly_weighted(influencedByCounters,max_influences)    
+    for influence, count in influenced_by_dict.items():
+        if debug:
+            print(f"Processing {influence}...")
+        dict_item = get_label_by_entity_url(influence)
+        songs = get_songs_by_artist_url(influence)
+        results.append({"artist":influence, "label":dict_item["label"], "songs":songs, "weight":count})
+    return sorted(results, key=lambda item: item["weight"], reverse=True)
+
+"""
+likes = ["beatles", "Bruno Mars", "Michael Jackson", "Britney Spears"]
+dislikes = ["Sam Smith"]
+songs = get_recommendarions_based_on_influencedBy_likes_dislikes(likes, dislikes, max_influences=5, debug=True)
+print(songs)
+"""

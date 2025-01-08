@@ -85,6 +85,53 @@ def fetch_artist(artist_name):
         print(f"Error fetching songs for artist '{artist_name}': {e}")
         return []
 
+def fetch_songs(songs):
+    
+    token = get_spotify_token(CLIENT_ID, CLIENT_SECRET)
+    """
+    Fetch song details from Spotify API given a list of song names.
+    
+    Args:
+        song_names (list): A list of song names to search for.
+        access_token (str): A valid Spotify API access token.
+
+    Returns:
+        list: A list of fetched song data, including track name, artist, and more.
+    """
+    base_url = "https://api.spotify.com/v1/search"
+    fetched_songs = []
+
+    headers = {
+        "Authorization": f"Bearer {token}"
+    }
+
+    try:
+        for song_name in songs:
+            params = {
+                "q": song_name,
+                "type": "track",
+                "limit": 1
+            }
+
+            response = requests.get(base_url, headers=headers, params=params)
+
+            if response.status_code != 200:
+                print(f"Failed to fetch song '{song_name}': {response.status_code} {response.text}")
+                continue
+
+            data = response.json()
+
+            # Check if any tracks are available and extract the first match
+            if data.get("tracks") and data["tracks"]["items"]:
+                fetched_songs.append(data["tracks"]["items"][0])
+            else:
+                print(f"No results found for song: {song_name}")
+
+        return fetched_songs
+
+    except Exception as e:
+        print(f"Error fetching songs from Spotify: {e}")
+        raise
 # Example
 #liked_artist = "Coldplay"
 #songs = fetch_songs_by_artist(liked_artist, limit=1)

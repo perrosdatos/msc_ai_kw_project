@@ -1,7 +1,9 @@
 from flask import Flask, request, render_template, jsonify, send_file
 from flask_cors import CORS
-from Queries.spotify import get_spotify_token, get_artist_songs, search_artist, fetch_songs_by_artist, fetch_artist
+from Queries.spotify import get_spotify_token, get_artist_songs, search_artist, fetch_songs_by_artist, fetch_artist, fetch_songs
+from Queries.yago import get_recommendarions_based_on_influencedBy_likes_dislikes, get_recommendations_based_on_influencedBy
 import requests
+import random
 
 app = Flask(__name__)
 CORS(app)
@@ -11,13 +13,13 @@ CLIENT_ID = 'fc19e8277188449795d08758c50b76ed'
 CLIENT_SECRET = '1f3ffb7277ed444c8b194772ed8e383c'
 
 fav_artits = []
-liked_songs = []
-disliked_songs = []
+liked_artists = []
+disliked_artists = []
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
+"""
 @app.route('/songs', methods=['GET'])
 def get_songs():
 
@@ -29,10 +31,34 @@ def get_songs():
         return jsonify("No favorite artists")
     
     for artist in fav_artits:
-        print(artist)
         recommended_songs += get_artist_songs(artist['id'], limit=5)
-        print(recommended_songs)
     return jsonify(recommended_songs)
+"""
+@app.route('/songs', methods=['GET'])
+def get_newsongs():
+
+    global fav_artits, liked_artists, disliked_artists
+    print("Getting recomendations")
+    recommended_songs = []
+    recommendation_list = []
+    if not fav_artits:
+        print("No favorite artists")
+        return jsonify("No favorite artists")
+    
+    if liked_artists or disliked_artists == []:
+        for artist in fav_artits:
+            recommendation_list.append(get_recommendations_based_on_influencedBy(artist["name"], 2))
+        print(f"Recomended List: {recommendation_list}")
+    else:
+        recommendation_list = get_recommendarions_based_on_influencedBy_likes_dislikes(liked_artists, disliked_artists, 2, True)
+
+    for recommendation in recommendation_list:
+        for song in recommendation["songs"]:
+            recommended_songs.append(song["label"])
+    print(f"Recomended Songs: {recommended_songs}")
+    random.shuffle(recommended_songs)
+    songs = fetch_songs(recommended_songs)
+    return jsonify(songs)
 
 @app.route('/getartist', methods=['GET'])
 def get_artist():
@@ -64,21 +90,22 @@ def save_fav_artists():
 
 @app.route('/feedbackSong', methods=['POST'])
 def handle_song_feedback():
-    global liked_songs, disliked_songs
+    global liked_artists, disliked_artists
     try:
         data = request.get_json()
         feedback = data.get('feedback')
-        song = data.get('song')
-
-        if not song or feedback not in ['like', 'dislike']:
+        artists = data.get('artists')
+        if not artists or feedback not in ['like', 'dislike']:
             return jsonify({"error": "Invalid feedback or song"}), 400
 
         if feedback == 'like':
-            liked_songs.append(song)
-            print(f"Liked songs: {liked_songs}")
+            for artist in artists:
+                liked_artists.append(artist["name"])
+            print(f"Liked songs: {liked_artists}")
         elif feedback == 'dislike':
-            disliked_songs.append(song)
-            print(f"Disliked songs: {disliked_songs}")
+            for artist in artists:
+                disliked_artists.append(artist["name"])
+            print(f"Disliked songs: {disliked_artists}")
 
         # Return success response
         return jsonify({"message": f"Song {'liked' if feedback == 'like' else 'disliked'} successfully!"}), 200
