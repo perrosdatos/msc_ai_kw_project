@@ -146,24 +146,34 @@ def get_label_by_entity_url(entity_url):
     except Exception as e:
         return {"error": str(e)}
 
-def get_recommendations_based_on_influencedBy(artist_str, max_influences = 2):
+def get_recommendations_based_on_influencedBy(artist_str, max_influences=2):
     results = []
     print("Getting influencedBy entities...")
     getting_items = get_entity_for_musician(artist_str)
-    if getting_items == []:
+    if not getting_items:
         print("No entity for musician")
         return results
+
     print(getting_items[0])
     influences = np.unique(list(map(lambda item: item["influenced_by"], getting_items))).tolist()
     influences = random.choices(influences, k=min(max_influences, len(influences)))
-    
+
     print(f"Choosing first {max_influences} artists...")
     for influence in influences:
         print(f"Processing {influence}...")
         dict_item = get_label_by_entity_url(influence)
+        if "error" in dict_item or not dict_item.get("label"):
+            print(f"Skipping influence {influence} due to missing label.")
+            continue
+
         songs = get_songs_by_artist_url(influence)
-        results.append({"artist":influence, "label":dict_item["label"], "songs":songs})
+        if songs:  # Only include influences with non-empty song lists
+            results.append({"artist": influence, "label": dict_item["label"], "songs": songs})
+        else:
+            print(f"Skipping influence {influence} due to no songs.")
+
     return results
+
 
 def get_randomly_weighted(items, k):
     artists = list(items.keys())

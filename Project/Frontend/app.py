@@ -36,27 +36,34 @@ def get_songs():
 """
 @app.route('/songs', methods=['GET'])
 def get_newsongs():
-
     global fav_artits, liked_artists, disliked_artists
-    print("Getting recomendations")
+    print("Getting recommendations")
     recommended_songs = []
     recommendation_list = []
+
     if not fav_artits:
         print("No favorite artists")
         return jsonify("No favorite artists")
-    
-    if liked_artists or disliked_artists == []:
-        for artist in fav_artits:
-            recommendation_list.append(get_recommendations_based_on_influencedBy(artist["name"], 2))
-        print(f"Recomended List: {recommendation_list}")
-    else:
-        recommendation_list = get_recommendarions_based_on_influencedBy_likes_dislikes(liked_artists, disliked_artists, 2, True)
 
+    if not liked_artists and not disliked_artists:
+        for artist in fav_artits:
+            # Extend the list with results from get_recommendations_based_on_influencedBy
+            recommendation_list.extend(get_recommendations_based_on_influencedBy(artist["name"], 2))
+        print(f"Recommendation List: {recommendation_list}")
+    else:
+        recommendation_list = get_recommendarions_based_on_influencedBy_likes_dislikes(
+            liked_artists, disliked_artists, 2, True
+        )
+
+    # Process each recommendation and collect songs
     for recommendation in recommendation_list:
         for song in recommendation["songs"]:
             recommended_songs.append(song["label"])
-    print(f"Recomended Songs: {recommended_songs}")
+
+    print(f"Recommended Songs: {recommended_songs}")
     random.shuffle(recommended_songs)
+
+    # Fetch songs using the shuffled recommended songs
     songs = fetch_songs(recommended_songs)
     return jsonify(songs)
 

@@ -236,18 +236,24 @@
         function nextSong() {
             if (isSongChanging) return; // Prevent going to next song if a song transition is in progress
             isSongChanging = true;
+
             currentSongIndex++;
-            songsLeft = songs.length - currentSongIndex
-            console.log(`Songs Left:`, {songs})
-            if (songs.length - currentSongIndex < 10){
-                fetchMoreSongs()
+            songsLeft = songs.length - currentSongIndex;
+
+            // Fetch more songs when remaining songs are less than 20% of the total songs
+            const percentageThreshold = 0.2; // 20%
+            if (songsLeft / songs.length <= percentageThreshold) {
+                fetchMoreSongs();
             }
+
             if (currentSongIndex >= songs.length) {
                 currentSongIndex = 0; // Loop back to the first song
             }
+
             displaySong(songs[currentSongIndex]);
-            setTimeout(() => isSongChanging = false, 500); // Reset flag after transition animation
+            setTimeout(() => (isSongChanging = false), 500); // Reset flag after transition animation
         }
+
 
         async function fetchMoreSongs() {
             try {
