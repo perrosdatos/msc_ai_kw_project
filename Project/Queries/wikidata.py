@@ -351,7 +351,10 @@ def get_recommendarions_based_on_influencedBy_likes_dislikes(likes = [], dislike
         results.append({"artist":influence, "label":dict_item["label"], "songs":songs, "weight":count})
     return sorted(results, key=lambda item: item["weight"], reverse=True)
 
+"""
+
 likes = ["beatles", "Bruno Mars", "Michael Jackson", "Britney Spears"]
 dislikes = ["Sam Smith"]
 songs = get_recommendarions_based_on_influencedBy_likes_dislikes(likes, dislikes, max_influences=4, timeout=15, debug=True)
 print(songs)
+"""

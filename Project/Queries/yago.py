@@ -16,7 +16,7 @@ def get_entity_for_musician(artist):
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX schema: <http://schema.org/>
 
-    SELECT DISTINCT ?entity ?type ?influencedBy WHERE {{
+    SELECT DISTINCT ?entity ?influencedBy WHERE {{
       {{
         ?entity a ?type ;
                 rdfs:label ?label .
