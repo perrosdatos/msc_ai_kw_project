@@ -19,21 +19,7 @@ disliked_artists = []
 @app.route('/')
 def index():
     return render_template('index.html')
-"""
-@app.route('/songs', methods=['GET'])
-def get_songs():
 
-    global fav_artits
-    recommended_songs = []
-    print(fav_artits)
-    if not fav_artits:
-        print("No favorite artists")
-        return jsonify("No favorite artists")
-    
-    for artist in fav_artits:
-        recommended_songs += get_artist_songs(artist['id'], limit=5)
-    return jsonify(recommended_songs)
-"""
 @app.route('/songs', methods=['GET'])
 def get_newsongs():
     global fav_artits, liked_artists, disliked_artists
