@@ -1,0 +1,170 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    margin: 0;
+    padding: 0;
+    color: #ecf0f1; 
+}
+html, body {
+    height: 100%;
+}
+.container {
+    display: flex;
+    height: 100%;
+}
+.left, .right {
+    flex: 1;
+}
+.center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.card-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #34495e;
+    position: absolute;
+    overflow: hidden; /* Ensure child elements respect the border-radius */
+    border-radius: 25px; /* Same as card for consistency */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.card {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    padding: 20px;
+    border: none;
+    border-radius: 25px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    background-color: #1c2833;
+    transition: transform 0.5s, opacity 0.5s;
+    will-change: transform, opacity;
+    animation: fadeIn 0.5s ease-in;
+    overflow: hidden; /* Ensure child content doesn't overflow the card */
+}
+.swipe-right {
+    transform: translateX(100vw) rotate(15deg); /* Swipe off to the right */
+    opacity: 0; /* Fade out */
+}
+
+.swipe-left {
+    transform: translateX(-100vw) rotate(-15deg); /* Swipe off to the left */
+    opacity: 0; /* Fade out */
+}
+
+.card-img {
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-top: 20px; /* Top padding for the image */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ecf0f1;
+}
+.song-info {
+    font-size: 1.2rem;
+    color: #bdc3c7;
+}
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.icon-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.icon-button img {
+    width: 55px;
+    height: 55px;
+    background-color: white;
+    transition: transform 0.2s;
+    border-radius: 50%; /* Circular icons */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); 
+    object-fit: cover;
+
+}
+.icon-button img:hover {
+    transform: scale(1.1);
+}
+
+/* Preferences Button Styling */
+#preferences-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it is above other elements */
+}
+#preferences-btn:hover {
+    background-color: #2980b9; 
+    transform: scale(1.05); 
+}
+
+#preferences-btn:active {
+    background-color: #1d6ca0; 
+    transform: scale(0.98); 
+}
+
+.no-artists-message {
+    color: white;
+}
+.no-song-message {
+    color: white;
+}
+
+.big-message {
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.small-message {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    margin: 0;
+}
+
+#loading-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-top-color: #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
